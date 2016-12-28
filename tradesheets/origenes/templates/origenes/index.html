@@ -1,10 +1,25 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html lang="en">
+<html> 
+  <head>
+    <title>D3-carto-map with queue.js</title>
+    <meta charset="utf-8">
 
-	<head></head>
+    <link rel="stylesheet" type="text/css" href="{% static 'origenes/css/d3map.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'origenes/css/style.css' %}" />
+  </head>
 
-	<body>hola</body>
+  <body>
+  	<div> Mapa 1 </div>
+    <div id="viz"></div>
 
+    <script type="text/javascript" src="{% static 'origenes/js/lib/d3/d3.v3.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'origenes/js/lib/topojson/topojson.v1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'origenes/js/lib/queue/queue.v1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'origenes/js/lib/d3/d3.carto.map.min.js' %}"></script>
+    
+    <script type="text/javascript" src="{% static 'origenes/js/visualization.js' %}"></script>
+
+  </body>
 </html>

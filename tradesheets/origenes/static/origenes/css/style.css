@@ -1,0 +1,16 @@
+#viz {
+  width: 100%;
+  height: 100%;
+}
+
+.city {
+  fill: none;
+  stroke: red;
+  stroke-width: 1px;
+}
+
+.land {
+  fill: lightgray;
+  stroke: black;
+  stroke-width: 1px;
+}
