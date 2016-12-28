@@ -1,0 +1,8 @@
+
+1) informacion por cada pais (click en pais de origen y me muestra en algun lado una ventana de reportes). 
+
+1.5) Mostrar informacion extra por precio de cada puerto cuando hacen click en el precio correspondiente
+
+2) puertos por zona (con la informacion correspondiente)
+
+3) mostrar diferentes combinaciones de puerto/informacion de acuerdo a Wheat / Soybean / etc.
