@@ -15,11 +15,3 @@
   stroke: black;
   stroke-width: 1px;
 }
-
-.country {
-  fill-opacity: 1;
-  fill: lightgray;
-  stroke-opacity: 0;
-  stroke: white;
-  stroke-width: 2px;
-}

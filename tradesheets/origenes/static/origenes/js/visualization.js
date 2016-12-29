@@ -2,8 +2,8 @@
 var data = {}, map;
 
 queue()
-  .defer(d3.json, "../static/origenes/data/land.topojson")
-  .defer(d3.csv, "../static/origenes/data/small_cities.csv")
+  .defer(d3.json, "../static/origenes/data/land.topojson") // land
+  .defer(d3.csv, "../static/origenes/data/small_cities.csv") // cities
   .await(ready);
 
 function ready(error, land, cities) {
@@ -13,17 +13,6 @@ function ready(error, land, cities) {
 
   map = d3.carto.map();
   d3.select("#viz").call(map);
-
-  // Limites entre los paises a considerar y datos sobre estos
-  landLayer = d3.carto.layer.featureArray();
-
-  landLayer
-    .features(topojson.feature(data.land, data.land.objects.world).features) // limites 
-    .label("Land")
-    .renderMode("svg")
-    .path("../static/origenes/data/world.geojson")  // != paises 
-    .clickableFeatures(true)
-    .cssClass("land");
 
   // Ciudades marcadas en el mapa
   cityLayer = d3.carto.layer.xyArray();
@@ -38,15 +27,54 @@ function ready(error, land, cities) {
     .x("xcoord")
     .y("ycoord")
 
+  // Limites entre los paises a considerar y datos sobre estos
+  landLayer = d3.carto.layer.featureArray();
+
+  landLayer
+    .features(topojson.feature(data.land, data.land.objects.world).features) // limites 
+    .label("Land")
+    .renderMode("svg")
+    .cssClass("land");
+
+  landLayer
+    .path("../static/origenes/data/land.topojson")  // != paises clickeables
+    .clickableFeatures(true);
+
   // Genero el mapa
   map
     .addCartoLayer(landLayer)
     .addCartoLayer(cityLayer)
-    .setScale(1);
+    //.addCartoLayer(countryLayer)
+    .mode("globe")
+    .setScale(.1);
 
-  map.updateChoropleth({
-    USA: '#0fa0fa',
-    CAN: '#0fa0fa'
+  // Juego con el mapa
+  
+  //d3.selectAll("path.land")
+  //  .style("fill", "pink");
+  //landLayer.g().selectAll("path.land").style("fill", "pink");
+  //colorScale = d3.scale.linear().domain([0,10000000,100000000,1000000000]).range(["gray","green","yellow","red"])
+  //d3.selectAll("path.land").style("fill", function(d) {return colorScale(d.properties.pop)})
+  d3.selectAll("path.land").style("fill", function(d) {
+    if (d.properties.iso == 'USA') {return "red"; }
+    else if (d.properties.iso == 'ARG') {return "blue"; }
+
+    return "lightgrey";
   });
 
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
