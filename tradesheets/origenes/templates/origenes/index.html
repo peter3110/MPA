@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html> 
   <head>
-    <title>D3-carto-map with queue.js</title>
+    <title> Mapa 1 </title>
     <meta charset="utf-8">
 
     <link rel="stylesheet" type="text/css" href="{% static 'origenes/css/d3map.css' %}" />
@@ -15,9 +15,12 @@
     <div id="viz"></div>
 
     <script type="text/javascript" src="{% static 'origenes/js/lib/d3/d3.v3.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'origenes/js/lib/topojson/topojson.v1.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'origenes/js/lib/queue/queue.v1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'origenes/js/lib/d3/d3.geo.projection.v0.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'origenes/js/lib/d3/d3.carto.map.min.js' %}"></script>
+	
+	<script type="text/javascript" src="{% static 'origenes/js/lib/datamaps/datamaps.world.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'origenes/js/lib/topojson/topojson.v1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'origenes/js/lib/queue/queue.v1.min.js' %}"></script>
     
     <script type="text/javascript" src="{% static 'origenes/js/visualization.js' %}"></script>
 
