@@ -4,14 +4,16 @@ var data = {}, map;
 queue()
   .defer(d3.json, "../static/origenes/data/countries.topojson") // land
   .defer(d3.csv, "../static/origenes/data/small_cities.csv") // cities
-  .defer(d3.json, "../static/origenes/data/oceans.json")
+  .defer(d3.json, "../static/origenes/data/oceans.json") // oceans
+  .defer(d3.json, "../static/origenes/data/paths.geojson") // paths
   .await(ready);
 
-function ready(error, countries, cities, oceans) {
+function ready(error, countries, cities, oceans, paths) {
 
   data.countries = countries;
   data.cities = cities;
   data.oceans = oceans;
+  data.paths = paths;
 
   map = d3.carto.map();
   d3.select("#viz")
@@ -19,7 +21,6 @@ function ready(error, countries, cities, oceans) {
 
   // Ciudades marcadas en el mapa
   cityLayer = d3.carto.layer.xyArray();
-
   cityLayer
     .features(data.cities)
     .label("Cities")
@@ -32,7 +33,6 @@ function ready(error, countries, cities, oceans) {
 
   // Paises
   countryLayer = d3.carto.layer.featureArray();
-
   countryLayer
     .features(topojson.feature(data.countries, data.countries.objects.world).features) // limites 
     .label("Country")
@@ -49,11 +49,20 @@ function ready(error, countries, cities, oceans) {
     .cssClass("oceans")
     .clickableFeatures(false);
 
+  // Arcos
+  pathsLayer = d3.carto.layer.geojson();
+  pathsLayer
+    .path("../static/origenes/data/paths.geojson")
+    .label("Fletes")
+    .renderMode("svg")
+    .cssClass("fletes");
+
   // Mapa
   map
     .addCartoLayer(countryLayer)
     .addCartoLayer(cityLayer)
     .addCartoLayer(oceansLayer)
+    .addCartoLayer(pathsLayer)
     .mode("globe")
     .setScale(.1);
 

@@ -1,0 +1,14 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+    	{
+    	"id":"cable_1007",
+    	"type":"Feature",
+    	"geometry":{
+    		"type":"LineString",
+    		"coordinates":[
+    			[-77.025,3.862],[-17.035,20.844]],
+    		"id":1007}
+    	}
+   	]
+}
