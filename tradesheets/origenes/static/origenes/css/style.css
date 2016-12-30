@@ -10,8 +10,14 @@
   stroke-opacity: 1;
 }
 
-.land {
+.countries {
   fill: lightgray;
+  stroke: black;
+  stroke-width: 1px;
+}
+
+.oceans {
+  fill: lightblue;
   stroke: black;
   stroke-width: 1px;
 }

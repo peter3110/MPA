@@ -1,9 +1,11 @@
 path,circle,rect,polygon,ellipse,line {
     vector-effect: non-scaling-stroke;
 }
+
 svg, canvas {
-    top: 0;
+  top: 0;
 }
+
 #d3MapZoomBox {
     position: absolute;
     z-index: 10;
