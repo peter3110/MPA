@@ -1,25 +1,56 @@
-#viz {
-  width: 100%;
+html,body {
   height: 100%;
+  width: 100%;
+  margin: 0;
 }
 
-.city {
-  r: 5;
-  fill: red;
-  stroke: black;
+.column {
+  max-width: 960px;
+  position: relative;
+  display: block;
+  margin: 0 auto;
+  padding: 0 10px;
+}
+
+h1 {
+  font-size: 46px;
+  font-weight: 500;
+  letter-spacing: -1px;
+  margin: 0.1em 0;
+}
+
+#map {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+.country {
+  fill-opacity: .25;
+  fill: #4682B4;
   stroke-opacity: 1;
+  stroke: black;
+  stroke-width: 2px;
 }
 
-.countries {
+.country-gray {
+  opacity: .25;
   fill: lightgray;
-  stroke: black;
-  stroke-width: 1px;
+  stroke: lightgray;
+  stroke-width: 1;
 }
 
-.oceans {
-  fill: lightblue;
+.country-red {
+  fill-opacity: .25;
+  fill: darkred;
   stroke: black;
-  stroke-width: 1px;
+  stroke-width: 1;
+}
+
+.capital {
+  fill: white;
+  stroke: black;
+  stroke-width: 2px;
 }
 
 .fletes {

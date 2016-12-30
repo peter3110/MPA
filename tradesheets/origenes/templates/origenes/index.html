@@ -10,19 +10,25 @@
     <link rel="stylesheet" type="text/css" href="{% static 'origenes/css/style.css' %}" />
   </head>
 
-  <body>
-  	<div> Mapa 1 </div>
-    <div id="viz"></div>
+  <body onload="makeSomeMaps()">
 
-    <script type="text/javascript" src="{% static 'origenes/js/lib/d3/d3.v3.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'origenes/js/lib/d3/d3.geo.projection.v0.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'origenes/js/lib/d3/d3.carto.map.min.js' %}"></script>
+  <div class="column">
+    <h1> Soybean - Origenes </h1>
+    <div class="index">
+      <div id="map" style="height:600px"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="{% static 'origenes/js/lib/d3/d3.v3.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'origenes/js/lib/d3/d3.geo.projection.v0.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'origenes/js/lib/d3/d3.carto.map.min.js' %}"></script>
 	
 	<script type="text/javascript" src="{% static 'origenes/js/lib/datamaps/datamaps.world.min.js' %}"></script>
 	<script type="text/javascript" src="{% static 'origenes/js/lib/topojson/topojson.v1.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'origenes/js/lib/queue/queue.v1.min.js' %}"></script>
-    
-    <script type="text/javascript" src="{% static 'origenes/js/visualization.js' %}"></script>
+  <script type="text/javascript" src="{% static 'origenes/js/lib/queue/queue.v1.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'origenes/js/tile.js' %}"></script> 
+
+  <script type="text/javascript" src="{% static 'origenes/js/visualization.js' %}"></script>
 
   </body>
 </html>

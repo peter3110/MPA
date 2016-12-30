@@ -2,13 +2,22 @@
     "type": "FeatureCollection",
     "features": [
     	{
-    	"id":"cable_1007",
+    	"id":"path_1",
     	"type":"Feature",
     	"geometry":{
     		"type":"LineString",
     		"coordinates":[
-    			[-77.025,3.862],[-17.035,20.844]],
-    		"id":1007}
-    	}
+    			[-47.8977,-15.7921],[-149.57,-17.535]],
+    		"id":1}
+    	},
+        {
+        "id":"path_2",
+        "type":"Feature",
+        "geometry":{
+            "type":"LineString",
+            "coordinates":[
+                [-70.6475,-33.475],[12.52,41.88]],
+            "id":2}
+        }
    	]
 }

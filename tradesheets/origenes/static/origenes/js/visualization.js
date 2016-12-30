@@ -1,53 +1,39 @@
 
-var data = {}, map;
-
-queue()
-  .defer(d3.json, "../static/origenes/data/countries.topojson") // land
-  .defer(d3.csv, "../static/origenes/data/small_cities.csv") // cities
-  .defer(d3.json, "../static/origenes/data/oceans.json") // oceans
-  .defer(d3.json, "../static/origenes/data/paths.geojson") // paths
-  .await(ready);
-
-function ready(error, countries, cities, oceans, paths) {
-
-  data.countries = countries;
-  data.cities = cities;
-  data.oceans = oceans;
-  data.paths = paths;
-
+function makeSomeMaps() {
   map = d3.carto.map();
-  d3.select("#viz")
-    .call(map);
 
-  // Ciudades marcadas en el mapa
-  cityLayer = d3.carto.layer.xyArray();
-  cityLayer
-    .features(data.cities)
-    .label("Cities")
-    .renderMode("svg")
-    .clickableFeatures(true)
-    .cssClass("city")
-    .markerSize(1)
-    .x("xcoord")
-    .y("ycoord")
+  d3.select("#map").call(map);
 
-  // Paises
-  countryLayer = d3.carto.layer.featureArray();
-  countryLayer
-    .features(topojson.feature(data.countries, data.countries.objects.world).features) // limites 
-    .label("Country")
-    .renderMode("svg")
-    .cssClass("countries")
-    .clickableFeatures(true);
+  // Terrain
+  terrainLayer = d3.carto.layer.tile();
+  
+  terrainLayer
+    .path("elijahmeeks.map-azn21pbi")
+    .label("Terrain");
 
-  // Oceanos
-  oceansLayer = d3.carto.layer.featureArray();
-  oceansLayer
-    .features(topojson.feature(data.oceans, data.oceans.objects.ocean).features)
-    .label("Ocean")
-    .renderMode("svg")
-    .cssClass("oceans")
-    .clickableFeatures(false);
+  // Countries
+  countryLayer = d3.carto.layer.topojson();
+  
+  countryLayer.path("../static/origenes/data/countries.topojson")
+  .label("Countries")
+  .renderMode("canvas")
+  .specificFeature("world")
+  .cssClass("country-gray")
+  .on("load", showCountryInfo)
+  .visibility(false);
+  
+  // Cities
+  capitalLayer = d3.carto.layer.csv();
+  capitalLayer
+  .path("../static/origenes/data/worldcapitals.csv")
+  .label("Capitals")
+  .cssClass("capital")
+  .renderMode("svg")
+  .markerSize(3)
+  .x("x")
+  .y("y")
+  .clickableFeatures(true)
+  .on("load", showCityInfo);
 
   // Arcos
   pathsLayer = d3.carto.layer.geojson();
@@ -57,42 +43,50 @@ function ready(error, countries, cities, oceans, paths) {
     .renderMode("svg")
     .cssClass("fletes");
 
-  // Mapa
+  // Map creation
   map
+    .addCartoLayer(terrainLayer)
     .addCartoLayer(countryLayer)
-    .addCartoLayer(cityLayer)
-    .addCartoLayer(oceansLayer)
+    .addCartoLayer(capitalLayer)
     .addCartoLayer(pathsLayer)
-    .mode("globe")
-    .setScale(.1);
-
-  // Juego con el mapa
+    .setScale(1);
   
-  //d3.selectAll("path.land")
-  //  .style("fill", "pink");
-  //landLayer.g().selectAll("path.land").style("fill", "pink");
-  //colorScale = d3.scale.linear().domain([0,10000000,100000000,1000000000]).range(["gray","green","yellow","red"])
-  //d3.selectAll("path.land").style("fill", function(d) {return colorScale(d.properties.pop)})
-  d3.selectAll("path.countries").style("fill", function(d) {
-    if (d.properties.iso == 'USA') {return "red"; }
-    else if (d.properties.iso == 'ARG') {return "blue"; }
+  // Informacion de ciudades
+  function showCityInfo() {
+    d3.csv("../static/origenes/data/worldcapitals.csv", loadData);
 
-    return "lightgrey";
-  });
-
-
+    function loadData(data) {
+      origenes = data.filter(function(d) {return d.population > 3000000});
+      
+      ciudadesDeOrigen = d3.carto.layer.xyArray();
+      
+      ciudadesDeOrigen
+      .features(origenes)
+      .label("High Population Capitals")
+      .cssClass("capital")
+      .renderMode("svg")
+      .markerSize(10)
+      .x("x")
+      .y("y")
+      .clickableFeatures(true);
+      
+      map.addCartoLayer(ciudadesDeOrigen);
+    }
+  }
+  
+  // Informacion de paises
+  function showCountryInfo() {
+    infoCountries = countryLayer.features().filter(function(d) {return d.properties.gdp > 1000});
+    
+    infoLayer = d3.carto.layer.featureArray();
+    
+    infoLayer
+    .features(infoCountries)
+    .label("High GDP")
+    .renderMode("svg")
+    .cssClass("country-red")
+    .clickableFeatures(true);
+  
+  map.addCartoLayer(infoLayer)
+  }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
