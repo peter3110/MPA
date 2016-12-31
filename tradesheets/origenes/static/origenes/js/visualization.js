@@ -47,7 +47,7 @@ function makeSomeMaps() {
   originLayer = d3.carto.layer.csv();
   originLayer
     .path("../static/origenes/data/origins.csv")
-    .label("Origins")
+    .label("Origenes")
     .cssClass("origins")
     .renderMode("svg")
     .markerSize(1)
@@ -71,18 +71,18 @@ function makeSomeMaps() {
 
     function loadData(data) {
       origenes = data;
-      ciudades2 = d3.carto.layer.xyArray();
+      ciudades = d3.carto.layer.xyArray();
 
       ciudades2
         .features(origenes)
-        .label("hola")
+        .label("Origenes")
         .cssClass("origins")
         .renderMode("svg")
         .markerSize(10)
         .x("xcoord")
         .y("ycoord");
 
-      map.addCartoLayer(ciudades2);
+      map.addCartoLayer(ciudades);
     }
   }
   
@@ -97,7 +97,7 @@ function makeSomeMaps() {
       
       ciudades
         .features(origenes)
-        .label("High Population Capitals")
+        .label("High Pop")
         .cssClass("capital")
         .renderMode("svg")
         .markerSize(10)
@@ -116,12 +116,12 @@ function makeSomeMaps() {
     infoLayer = d3.carto.layer.featureArray();
     
     infoLayer
-    .features(infoCountries)
-    .label("High GDP")
-    .renderMode("svg")
-    .cssClass("country-red")
-    .clickableFeatures(true);
+      .features(infoCountries)
+      .label("High GDP")
+      .renderMode("svg")
+      .cssClass("country-red")
+      .clickableFeatures(true);
   
-  map.addCartoLayer(infoLayer)
+    map.addCartoLayer(infoLayer)
   }
 }
