@@ -25,6 +25,13 @@ h1 {
   position: absolute;
 }
 
+.origins {
+  r: 5;
+  fill: red;
+  stroke: black;
+  stroke-opacity: 1;
+}
+
 .country {
   fill-opacity: .25;
   fill: #4682B4;
